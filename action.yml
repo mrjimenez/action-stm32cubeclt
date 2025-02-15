@@ -1,0 +1,20 @@
+#
+# https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-docker-container-action#creating-an-action-metadata-file
+#
+
+# action.yml
+name: "Compile with STM32CubeCLT"
+description: "Command line compilation of a target using STM32CubeIde"
+inputs:
+  path: # id of input
+    description: "Path to STM32CubeIde project, usually where the .ioc file is located"
+    required: true
+  target: # id of input
+    description: "The target to compile (Debug, Release, etc)"
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.path }}
+    - ${{ inputs.target }}
